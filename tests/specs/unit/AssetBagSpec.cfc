@@ -48,6 +48,20 @@ component extends="testbox.system.BaseSpec" {
                     '<script type="text/javascript" src="/includes/js/app3.js"></script>'
                 ], chr( 10 ) ) );
             } );
+
+            it( "can add inline javascript as well as files", function() {
+                var assetBag = new root.models.AssetBag();
+
+                assetBag.addInlineJavascriptToHead( "console.log('Hi from header!');" );
+                assetBag.addInlineJavascriptToFooter( "console.log('Hi from footer!');" );
+
+                expect( assetBag.renderHead() ).toBe(
+                    '<script type="text/javascript">console.log(''Hi from header!'');</script>'
+                );
+                expect( assetBag.renderFooter() ).toBe(
+                    '<script type="text/javascript">console.log(''Hi from footer!'');</script>'
+                );
+            } );
         } );
     }
 

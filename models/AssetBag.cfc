@@ -9,8 +9,18 @@ component {
         return this;
     }
 
+    function addInlineJavascriptToHead( content ) {
+        variables.head.append( new JavascriptAsset( content, true ) );
+        return this;
+    }
+
     function addJavascriptToHead( filepath ) {
         variables.head.append( new JavascriptAsset( filepath ) );
+        return this;
+    }
+
+    function addInlineJavascriptToFooter( content ) {
+        variables.footer.append( new JavascriptAsset( content, true ) );
         return this;
     }
 

@@ -1,14 +1,23 @@
 component {
 
-    property name="filepath";
+    property name="content";
 
-    function init( filepath ) {
-        variables.filepath = arguments.filepath;
+    function init( content, inline = false ) {
+        variables.content = arguments.content;
+        variables.inline = arguments.inline;
         return this;
     }
 
     function toString() {
-        return '<script type="text/javascript" src="#filepath#"></script>';
+        return variables.inline ? renderInline() : renderSrc();
+    }
+
+    function renderInline() {
+        return '<script type="text/javascript">#content#</script>';
+    }
+
+    function renderSrc() {
+        return '<script type="text/javascript" src="#content#"></script>';
     }
 
 }
