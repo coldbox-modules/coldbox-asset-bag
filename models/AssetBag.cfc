@@ -13,7 +13,7 @@ component {
         if ( canAddAsset( asset ) ) {
             variables[ location ].append( asset );
         }
-        return this;
+        return asset;
     }
 
     function addAssetToHead( asset ) {
@@ -49,10 +49,16 @@ component {
     }
 
     function getHeadContent() {
+        arraySort( variables.head, function( headA, headB ) {
+            return compare( headB.getPriority(), headA.getPriority() );
+        } );
         return variables.head;
     }
 
     function getFooterContent() {
+        arraySort( variables.footer, function( footerA, footerB ) {
+            return compare( footerB.getPriority(), footerA.getPriority() );
+        } );
         return variables.footer;
     }
 

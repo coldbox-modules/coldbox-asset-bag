@@ -87,6 +87,19 @@ component extends="testbox.system.BaseSpec" {
                     '<script type="text/javascript">console.log(''Hi!'');</script>'
                 ], chr( 10 ) ) );
             } );
+
+            it( "renders priority assets before non-priority assets", function() {
+                var assetBag = new root.models.AssetBag();
+
+                assetBag.addJavascriptToFooter( "/includes/js/app1.js" );
+                assetBag.addJavascriptToFooter( "/includes/js/app2.js" ).setPriority( 1 );
+
+                expect( assetBag.renderHead() ).toBe( "" );
+                expect( assetBag.renderFooter() ).toBe( arrayToList( [
+                    '<script type="text/javascript" src="/includes/js/app2.js"></script>',
+                    '<script type="text/javascript" src="/includes/js/app1.js"></script>'
+                ], chr( 10 ) ) );
+            } );
         } );
     }
 
