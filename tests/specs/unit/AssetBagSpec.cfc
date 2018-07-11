@@ -74,6 +74,19 @@ component extends="testbox.system.BaseSpec" {
                     '<script type="text/javascript" src="/includes/js/app.js"></script>'
                 );
             } );
+
+            it( "always adds inline javascript even when the content is identical", function() {
+                var assetBag = new root.models.AssetBag();
+
+                assetBag.addInlineJavascriptToFooter( "console.log('Hi!');" );
+                assetBag.addInlineJavascriptToFooter( "console.log('Hi!');" );
+
+                expect( assetBag.renderHead() ).toBe( "" );
+                expect( assetBag.renderFooter() ).toBe( arrayToList( [
+                    '<script type="text/javascript">console.log(''Hi!'');</script>',
+                    '<script type="text/javascript">console.log(''Hi!'');</script>'
+                ], chr( 10 ) ) );
+            } );
         } );
     }
 

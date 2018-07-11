@@ -20,28 +20,32 @@ component {
         return addAsset( asset, "head" );
     }
 
-    function addJavascriptToHead( filepath, inline = false ) {
+    function addJavascriptToHead( filepath ) {
         return addAssetToHead(
-            new JavascriptAsset( filepath, inline )
+            new JavascriptAsset( filepath )
         );
     }
 
     function addInlineJavascriptToHead( content ) {
-        return addJavascriptToHead( content, true );
+        return addAssetToHead(
+            new InlineJavascriptAsset( content )
+        );
     }
 
     function addAssetToFooter( asset ) {
         return addAsset( asset, "footer" );
     }
 
-    function addJavascriptToFooter( filepath, inline = false ) {
+    function addJavascriptToFooter( filepath ) {
         return addAssetToFooter(
-            new JavascriptAsset( filepath, inline )
+            new JavascriptAsset( filepath )
         );
     }
 
     function addInlineJavascriptToFooter( content ) {
-        return addJavascriptToFooter( content, true );
+        return addAssetToFooter(
+            new InlineJavascriptAsset( content )
+        );
     }
 
     function getHeadContent() {

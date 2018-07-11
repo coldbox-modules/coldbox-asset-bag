@@ -8,12 +8,11 @@ component accessors="true" {
     }
 
     function toString() {
-        return '<script type="text/javascript" src="#content#"></script>';
+        return '<script type="text/javascript">#content#</script>';
     }
 
     function isSameAs( otherAsset ) {
-        return isInstanceOf( otherAsset, "JavascriptAsset" ) &&
-            ( getContent() == otherAsset.getContent() );
+        return false;
     }
 
 }
