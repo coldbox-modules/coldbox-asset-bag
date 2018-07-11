@@ -1,0 +1,36 @@
+{
+    "name":"coldbox-asset-bag",
+    "version":"0.0.0",
+    "author":"",
+    "location":"elpete/coldbox-asset-bag#v0.0.0",
+    "homepage":"https://github.com/elpete/coldbox-asset-bag",
+    "documentation":"https://github.com/elpete/coldbox-asset-bag",
+    "repository":{
+        "type":"git",
+        "URL":"https://github.com/elpete/coldbox-asset-bag"
+    },
+    "bugs":"https://github.com/elpete/coldbox-asset-bag/issues",
+    "slug":"coldbox-asset-bag",
+    "shortDescription":"An asset bag to manage css and javascript dependencies",
+    "description":"An asset bag to manage css and javascript dependencies",
+    "type":"modules",
+    "dependencies":{},
+    "devDependencies":{
+        "coldbox":"^4.3.0+188",
+        "testbox":"^2.4.0+80"
+    },
+    "installPaths":{
+        "testbox":"testbox",
+        "coldbox":"tests/resources/app/coldbox"
+    },
+    "scripts":{
+        "postVersion":"package set location='elpete/coldbox-asset-bag#v`package version`'",
+        "onRelease":"publish",
+        "postPublish":"!git push && !git push --tags"
+    },
+    "ignore":[
+        "**/.*",
+        "test",
+        "tests"
+    ]
+}
