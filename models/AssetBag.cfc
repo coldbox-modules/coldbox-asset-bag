@@ -10,9 +10,8 @@ component {
     }
 
     function addAsset( asset, location ) {
-        if ( canAddAsset( asset ) ) {
-            variables[ location ].append( asset );
-        }
+        removeDuplicateAssets( asset );
+        variables[ location ].append( asset );
         return asset;
     }
 
@@ -74,18 +73,13 @@ component {
         } ).toList( chr( 10 ) );
     }
 
-    function canAddAsset( asset ) {
-        for ( var headAsset in variables.head ) {
-            if ( headAsset.isSameAs( asset ) ) {
-                return false;
-            }
-        }
-        for ( var footerAsset in variables.footer ) {
-            if ( footerAsset.isSameAs( asset ) ) {
-                return false;
-            }
-        }
-        return true;
+    function removeDuplicateAssets( asset ) {
+        variables.head = variables.head.filter( function( headAsset ) {
+            return ! headAsset.isSameAs( asset );
+        } );
+        variables.footer = variables.footer.filter( function( footerAsset ) {
+            return ! footerAsset.isSameAs( asset );
+        } );
     }
 
 }

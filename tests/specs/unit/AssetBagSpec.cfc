@@ -117,6 +117,20 @@ component extends="testbox.system.BaseSpec" {
                     '<script type="text/javascript" src="/includes/js/app1.js"></script>'
                 ], chr( 10 ) ) );
             } );
+
+            it( "overwrites duplicate assets keeping the last priority", function() {
+                var assetBag = new root.models.AssetBag();
+
+                assetBag.addJavascriptToFooter( "/includes/js/app1.js" ).setPriority( 20 );
+                assetBag.addJavascriptToFooter( "/includes/js/app2.js" ).setPriority( 10 );
+                assetBag.addJavascriptToFooter( "/includes/js/app2.js" ).setPriority( 30 );
+
+                expect( assetBag.renderHead() ).toBe( "" );
+                expect( assetBag.renderFooter() ).toBe( arrayToList( [
+                    '<script type="text/javascript" src="/includes/js/app2.js"></script>',
+                    '<script type="text/javascript" src="/includes/js/app1.js"></script>'
+                ], chr( 10 ) ) );
+            } );
         } );
     }
 
