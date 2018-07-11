@@ -21,6 +21,17 @@ component extends="testbox.system.BaseSpec" {
                 );
                 expect( assetBag.renderFooter() ).toBe( "" );
             } );
+
+            it( "can add javascript files to the footer", function() {
+                var assetBag = new root.models.AssetBag();
+
+                assetBag.addJavascriptToFooter( "/includes/js/app.js" );
+
+                expect( assetBag.renderHead() ).toBe( "" );
+                expect( assetBag.renderFooter() ).toBe(
+                    '<script type="text/javascript" src="/includes/js/app.js"></script>'
+                );
+            } );
         } );
     }
 

@@ -14,6 +14,11 @@ component {
         return this;
     }
 
+    function addJavascriptToFooter( filepath ) {
+        variables.footer.append( new JavascriptAsset( filepath ) );
+        return this;
+    }
+
     function getHeadContent() {
         return variables.head;
     }
@@ -29,7 +34,9 @@ component {
     }
 
     function renderFooter() {
-        return "";
+        return getFooterContent().map( function( asset ) {
+            return asset.toString();
+        } ).toList( chr( 10 ) );
     }
 
 }
