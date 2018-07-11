@@ -32,6 +32,22 @@ component extends="testbox.system.BaseSpec" {
                     '<script type="text/javascript" src="/includes/js/app.js"></script>'
                 );
             } );
+
+            it( "can add multiple javascript files", function() {
+                var assetBag = new root.models.AssetBag();
+
+                assetBag.addJavascriptToHead( "/includes/js/app1.js" );
+                assetBag.addJavascriptToFooter( "/includes/js/app2.js" );
+                assetBag.addJavascriptToFooter( "/includes/js/app3.js" );
+
+                expect( assetBag.renderHead() ).toBe( arrayToList( [
+                    '<script type="text/javascript" src="/includes/js/app1.js"></script>'
+                ], chr( 10 ) ) );
+                expect( assetBag.renderFooter() ).toBe( arrayToList( [
+                    '<script type="text/javascript" src="/includes/js/app2.js"></script>',
+                    '<script type="text/javascript" src="/includes/js/app3.js"></script>'
+                ], chr( 10 ) ) );
+            } );
         } );
     }
 
