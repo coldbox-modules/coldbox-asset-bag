@@ -100,6 +100,23 @@ component extends="testbox.system.BaseSpec" {
                     '<script type="text/javascript" src="/includes/js/app1.js"></script>'
                 ], chr( 10 ) ) );
             } );
+
+            it( "renders priority assets in descending order", function() {
+                var assetBag = new root.models.AssetBag();
+
+                assetBag.addJavascriptToFooter( "/includes/js/app1.js" );
+                assetBag.addJavascriptToFooter( "/includes/js/app2.js" ).setPriority( 10 );
+                assetBag.addJavascriptToFooter( "/includes/js/app3.js" ).setPriority( 1 );
+                assetBag.addJavascriptToFooter( "/includes/js/app4.js" ).setPriority( 100 );
+
+                expect( assetBag.renderHead() ).toBe( "" );
+                expect( assetBag.renderFooter() ).toBe( arrayToList( [
+                    '<script type="text/javascript" src="/includes/js/app4.js"></script>',
+                    '<script type="text/javascript" src="/includes/js/app2.js"></script>',
+                    '<script type="text/javascript" src="/includes/js/app3.js"></script>',
+                    '<script type="text/javascript" src="/includes/js/app1.js"></script>'
+                ], chr( 10 ) ) );
+            } );
         } );
     }
 
