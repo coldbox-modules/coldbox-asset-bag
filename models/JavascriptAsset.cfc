@@ -1,4 +1,4 @@
-component {
+component accessors="true" {
 
     property name="content";
 
@@ -18,6 +18,11 @@ component {
 
     function renderSrc() {
         return '<script type="text/javascript" src="#content#"></script>';
+    }
+
+    function isSameAs( otherAsset ) {
+        return isInstanceOf( otherAsset, "JavascriptAsset" ) &&
+            ( getContent() == otherAsset.getContent() );
     }
 
 }

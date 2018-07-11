@@ -62,6 +62,18 @@ component extends="testbox.system.BaseSpec" {
                     '<script type="text/javascript">console.log(''Hi from footer!'');</script>'
                 );
             } );
+
+            it( "does not add the same file path twice", function() {
+                var assetBag = new root.models.AssetBag();
+
+                assetBag.addJavascriptToFooter( "/includes/js/app.js" );
+                assetBag.addJavascriptToFooter( "/includes/js/app.js" );
+
+                expect( assetBag.renderHead() ).toBe( "" );
+                expect( assetBag.renderFooter() ).toBe(
+                    '<script type="text/javascript" src="/includes/js/app.js"></script>'
+                );
+            } );
         } );
     }
 
