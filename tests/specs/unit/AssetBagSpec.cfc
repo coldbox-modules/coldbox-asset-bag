@@ -131,6 +131,26 @@ component extends="testbox.system.BaseSpec" {
                     '<script type="text/javascript" src="/includes/js/app1.js"></script>'
                 ], chr( 10 ) ) );
             } );
+
+            it( "can add a mixture of filepath and inline javascript assets", function() {
+                var assetBag = new root.models.AssetBag();
+
+                assetBag.addInlineJavascriptToHead( "console.log('Hello, from head');" );
+                assetBag.addJavascriptToHead( "/includes/js/app1.js" );
+                assetBag.addJavascriptToFooter( "/includes/js/app2.js" );
+                assetBag.addInlineJavascriptToFooter( "console.log('Hello, from footer');" );
+                assetBag.addJavascriptToFooter( "/includes/js/app3.js" );
+
+                expect( assetBag.renderHead() ).toBe( arrayToList( [
+                    '<script type="text/javascript">console.log(''Hello, from head'');</script>',
+                    '<script type="text/javascript" src="/includes/js/app1.js"></script>'
+                    ], chr( 10 ) ) );
+                expect( assetBag.renderFooter() ).toBe( arrayToList( [
+                    '<script type="text/javascript" src="/includes/js/app2.js"></script>',
+                    '<script type="text/javascript">console.log(''Hello, from footer'');</script>',
+                    '<script type="text/javascript" src="/includes/js/app3.js"></script>'
+                ], chr( 10 ) ) );
+            } );
         } );
     }
 
