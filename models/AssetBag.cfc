@@ -1,8 +1,5 @@
 component {
 
-    property name="head";
-    property name="footer";
-
     function init() {
         variables.head = {
             css = [],
@@ -43,6 +40,12 @@ component {
         );
     }
 
+    function addInlineCssToHead( content ) {
+        return addAssetToHead(
+            new InlineCssAsset( content )
+        );
+    }
+
     function addAssetToFooter( asset ) {
         return addAsset( asset, "footer" );
     }
@@ -62,6 +65,12 @@ component {
     function addInlineJavascriptToFooter( content ) {
         return addAssetToFooter(
             new InlineJavascriptAsset( content )
+        );
+    }
+
+    function addInlineCssToFooter( content ) {
+        return addAssetToFooter(
+            new InlineCssAsset( content )
         );
     }
 

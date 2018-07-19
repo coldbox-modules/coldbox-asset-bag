@@ -120,6 +120,20 @@ component extends="testbox.system.BaseSpec" {
                 );
             } );
 
+            it( "can add inline css as well as files", function() {
+                var assetBag = new root.models.AssetBag();
+
+                assetBag.addInlineCssToHead( "body { background-color: ##ff0000; }" );
+                assetBag.addInlineCssToFooter( "* { outline: none; }" );
+
+                expect( assetBag.renderHead() ).toBe(
+                    '<style>body { background-color: ##ff0000; }</style>'
+                );
+                expect( assetBag.renderFooter() ).toBe(
+                    '<style>* { outline: none; }</style>'
+                );
+            } );
+
             it( "does not add the same javascript file path twice", function() {
                 var assetBag = new root.models.AssetBag();
 
