@@ -146,6 +146,18 @@ component extends="testbox.system.BaseSpec" {
                 );
             } );
 
+            it( "does not add the same css file path twice", function() {
+                var assetBag = new root.models.AssetBag();
+
+                assetBag.addCssToFooter( "/includes/css/app.css" );
+                assetBag.addCssToFooter( "/includes/css/app.css" );
+
+                expect( assetBag.renderHead() ).toBe( "" );
+                expect( assetBag.renderFooter() ).toBe(
+                    '<link type="text/css" href="/includes/css/app.css">'
+                );
+            } );
+
             it( "always adds inline javascript even when the content is identical", function() {
                 var assetBag = new root.models.AssetBag();
 
