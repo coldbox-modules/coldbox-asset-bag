@@ -171,6 +171,19 @@ component extends="testbox.system.BaseSpec" {
                 ], chr( 10 ) ) );
             } );
 
+            it( "always adds inline css even when the content is identical", function() {
+                var assetBag = new root.models.AssetBag();
+
+                assetBag.addInlineCssToFooter( "* { outline: none; }" );
+                assetBag.addInlineCssToFooter( "* { outline: none; }" );
+
+                expect( assetBag.renderHead() ).toBe( "" );
+                expect( assetBag.renderFooter() ).toBe( arrayToList( [
+                    '<style>* { outline: none; }</style>',
+                    '<style>* { outline: none; }</style>'
+                ], chr( 10 ) ) );
+            } );
+
             it( "renders priority assets before non-priority assets", function() {
                 var assetBag = new root.models.AssetBag();
 
