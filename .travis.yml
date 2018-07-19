@@ -20,7 +20,7 @@ install:
   - sudo apt-get update && sudo apt-get --assume-yes install commandbox
   - box install
 before_script:
-  - box server start cfengine=$ENGINE port=8500
+  - box server start cfengine=$ENGINE port=8500 saveSettings=false
 script:
   - box testbox run runner='http://127.0.0.1:8500/tests/runner.cfm'
 after_success:
