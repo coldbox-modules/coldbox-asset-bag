@@ -12,6 +12,10 @@ component accessors="true" implements="Asset" {
         return '<script type="text/javascript">#content#</script>';
     }
 
+    public numeric function getPriority() {
+        return variables.priority;
+    }
+
     public string function getType() {
         return "javascript";
     }

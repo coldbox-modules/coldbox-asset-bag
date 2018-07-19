@@ -12,6 +12,10 @@ component accessors="true" implements="Asset" {
         return '<style>#content#</style>';
     }
 
+    public numeric function getPriority() {
+        return variables.priority;
+    }
+
     public string function getType() {
         return "css";
     }
