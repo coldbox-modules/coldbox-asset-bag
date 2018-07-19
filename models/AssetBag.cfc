@@ -25,6 +25,12 @@ component {
         );
     }
 
+    function addCSSToHead( filepath ) {
+        return addAssetToHead(
+            new CssAsset( filepath )
+        );
+    }
+
     function addInlineJavascriptToHead( content ) {
         return addAssetToHead(
             new InlineJavascriptAsset( content )
