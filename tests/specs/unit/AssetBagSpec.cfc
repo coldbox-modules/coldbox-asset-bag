@@ -87,7 +87,7 @@ component extends="testbox.system.BaseSpec" {
                 ], chr( 10 ) ) );
             } );
 
-            xit( "renders css files before js files", function() {
+            it( "renders css files before js files", function() {
                 var assetBag = new root.models.AssetBag();
 
                 assetBag.addJavascriptToHead( "/includes/js/app1.js" );
