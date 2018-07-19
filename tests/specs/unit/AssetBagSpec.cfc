@@ -187,10 +187,16 @@ component extends="testbox.system.BaseSpec" {
             it( "renders priority assets before non-priority assets", function() {
                 var assetBag = new root.models.AssetBag();
 
+                assetBag.addCssToHead( "/includes/css/app1.css" );
+                assetBag.addCssToHead( "/includes/css/app2.css" ).setPriority( 1 );
+
                 assetBag.addJavascriptToFooter( "/includes/js/app1.js" );
                 assetBag.addJavascriptToFooter( "/includes/js/app2.js" ).setPriority( 1 );
 
-                expect( assetBag.renderHead() ).toBe( "" );
+                expect( assetBag.renderHead() ).toBe( arrayToList( [
+                    '<link type="text/css" href="/includes/css/app2.css">',
+                    '<link type="text/css" href="/includes/css/app1.css">'
+                ], chr( 10 ) ) );
                 expect( assetBag.renderFooter() ).toBe( arrayToList( [
                     '<script type="text/javascript" src="/includes/js/app2.js"></script>',
                     '<script type="text/javascript" src="/includes/js/app1.js"></script>'
