@@ -47,6 +47,12 @@ component {
         );
     }
 
+    function addCssToFooter( filepath ) {
+        return addAssetToFooter(
+            new CssAsset( filepath )
+        );
+    }
+
     function addInlineJavascriptToFooter( content ) {
         return addAssetToFooter(
             new InlineJavascriptAsset( content )

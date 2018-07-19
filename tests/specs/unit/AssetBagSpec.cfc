@@ -25,7 +25,7 @@ component extends="testbox.system.BaseSpec" {
             it( "can add css files to the head", function() {
                 var assetBag = new root.models.AssetBag();
 
-                assetBag.addCSSToHead( "/includes/css/app.css" );
+                assetBag.addCssToHead( "/includes/css/app.css" );
 
                 expect( assetBag.renderHead() ).toBe(
                     '<link type="text/css" href="/includes/css/app.css">'
@@ -41,6 +41,17 @@ component extends="testbox.system.BaseSpec" {
                 expect( assetBag.renderHead() ).toBe( "" );
                 expect( assetBag.renderFooter() ).toBe(
                     '<script type="text/javascript" src="/includes/js/app.js"></script>'
+                );
+            } );
+
+            it( "can add css files to the footer", function() {
+                var assetBag = new root.models.AssetBag();
+
+                assetBag.addCssToFooter( "/includes/css/app.css" );
+
+                expect( assetBag.renderHead() ).toBe( "" );
+                expect( assetBag.renderFooter() ).toBe(
+                    '<link type="text/css" href="/includes/css/app.css">'
                 );
             } );
 
