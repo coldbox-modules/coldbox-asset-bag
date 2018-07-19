@@ -25,7 +25,7 @@ component {
         );
     }
 
-    function addCSSToHead( filepath ) {
+    function addCssToHead( filepath ) {
         return addAssetToHead(
             new CssAsset( filepath )
         );

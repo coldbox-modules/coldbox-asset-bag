@@ -25,10 +25,10 @@ component extends="testbox.system.BaseSpec" {
             it( "can add css files to the head", function() {
                 var assetBag = new root.models.AssetBag();
 
-                assetBag.addCSSToHead( "/includes/js/app.js" );
+                assetBag.addCSSToHead( "/includes/css/app.css" );
 
                 expect( assetBag.renderHead() ).toBe(
-                    '<link type="text/css" href="/includes/js/app.js">'
+                    '<link type="text/css" href="/includes/css/app.css">'
                 );
                 expect( assetBag.renderFooter() ).toBe( "" );
             } );
