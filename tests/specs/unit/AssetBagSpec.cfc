@@ -71,6 +71,22 @@ component extends="testbox.system.BaseSpec" {
                 ], chr( 10 ) ) );
             } );
 
+            it( "can add multiple css files", function() {
+                var assetBag = new root.models.AssetBag();
+
+                assetBag.addCssToHead( "/includes/css/app1.css" );
+                assetBag.addCssToFooter( "/includes/css/app2.css" );
+                assetBag.addCssToFooter( "/includes/css/app3.css" );
+
+                expect( assetBag.renderHead() ).toBe( arrayToList( [
+                    '<link type="text/css" href="/includes/css/app1.css">'
+                ], chr( 10 ) ) );
+                expect( assetBag.renderFooter() ).toBe( arrayToList( [
+                    '<link type="text/css" href="/includes/css/app2.css">',
+                    '<link type="text/css" href="/includes/css/app3.css">'
+                ], chr( 10 ) ) );
+            } );
+
             it( "can add inline javascript as well as files", function() {
                 var assetBag = new root.models.AssetBag();
 
