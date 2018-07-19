@@ -12,6 +12,10 @@ component accessors="true" implements="Asset" {
         return '<script type="text/javascript">#content#</script>';
     }
 
+    public string function getType() {
+        return "javascript";
+    }
+
     public boolean function isSameAs( required any otherAsset ) {
         return false;
     }

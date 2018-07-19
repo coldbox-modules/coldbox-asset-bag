@@ -4,14 +4,20 @@ component {
     property name="footer";
 
     function init() {
-        variables.head = [];
-        variables.footer = [];
+        variables.head = {
+            css = [],
+            javascript = []
+        };
+        variables.footer = {
+            css = [],
+            javascript = []
+        };
         return this;
     }
 
     function addAsset( asset, location ) {
         removeDuplicateAssets( asset );
-        variables[ location ].append( asset );
+        variables[ location ][ asset.getType() ].append( asset );
         return asset;
     }
 
@@ -60,17 +66,29 @@ component {
     }
 
     function getHeadContent() {
-        arraySort( variables.head, function( headA, headB ) {
+        arraySort( variables.head.css, function( headA, headB ) {
             return compare( headB.getPriority(), headA.getPriority() );
         } );
-        return variables.head;
+        arraySort( variables.head.javascript, function( headA, headB ) {
+            return compare( headB.getPriority(), headA.getPriority() );
+        } );
+        var totalHeadContent = [];
+        totalHeadContent.append( variables.head.css, true );
+        totalHeadContent.append( variables.head.javascript, true );
+        return totalHeadContent;
     }
 
     function getFooterContent() {
-        arraySort( variables.footer, function( footerA, footerB ) {
+        arraySort( variables.footer.css, function( footerA, footerB ) {
             return compare( footerB.getPriority(), footerA.getPriority() );
         } );
-        return variables.footer;
+        arraySort( variables.footer.javascript, function( footerA, footerB ) {
+            return compare( footerB.getPriority(), footerA.getPriority() );
+        } );
+        var totalFooterContent = [];
+        totalFooterContent.append( variables.footer.css, true );
+        totalFooterContent.append( variables.footer.javascript, true );
+        return totalFooterContent;
     }
 
     function renderHead() {
@@ -86,12 +104,22 @@ component {
     }
 
     function removeDuplicateAssets( asset ) {
-        variables.head = variables.head.filter( function( headAsset ) {
-            return ! headAsset.isSameAs( asset );
-        } );
-        variables.footer = variables.footer.filter( function( footerAsset ) {
-            return ! footerAsset.isSameAs( asset );
-        } );
+        variables.head.css = variables.head.css
+            .filter( function( headAsset ) {
+                return ! headAsset.isSameAs( asset );
+            } );
+        variables.head.javascript = variables.head.javascript
+            .filter( function( headAsset ) {
+                return ! headAsset.isSameAs( asset );
+            } );
+        variables.footer.css = variables.footer.css
+            .filter( function( footerAsset ) {
+                return ! footerAsset.isSameAs( asset );
+            } );
+        variables.footer.javascript = variables.footer.javascript
+            .filter( function( footerAsset ) {
+                return ! footerAsset.isSameAs( asset );
+            } );
     }
 
 }

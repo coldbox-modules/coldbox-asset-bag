@@ -87,6 +87,25 @@ component extends="testbox.system.BaseSpec" {
                 ], chr( 10 ) ) );
             } );
 
+            xit( "renders css files before js files", function() {
+                var assetBag = new root.models.AssetBag();
+
+                assetBag.addJavascriptToHead( "/includes/js/app1.js" );
+                assetBag.addCssToHead( "/includes/css/app1.css" );
+
+                assetBag.addJavascriptToFooter( "/includes/js/app2.js" );
+                assetBag.addCssToFooter( "/includes/css/app2.css" );
+
+                expect( assetBag.renderHead() ).toBe( arrayToList( [
+                    '<link type="text/css" href="/includes/css/app1.css">',
+                    '<script type="text/javascript" src="/includes/js/app1.js"></script>'
+                ], chr( 10 ) ) );
+                expect( assetBag.renderFooter() ).toBe( arrayToList( [
+                    '<link type="text/css" href="/includes/css/app2.css">',
+                    '<script type="text/javascript" src="/includes/js/app2.js"></script>'
+                ], chr( 10 ) ) );
+            } );
+
             it( "can add inline javascript as well as files", function() {
                 var assetBag = new root.models.AssetBag();
 
