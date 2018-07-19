@@ -1,10 +1,10 @@
 {
     "name":"coldbox-asset-bag",
-    "version":"0.0.0",
+    "version":"1.0.0",
     "author":[
         "Eric Peterson <eric@elpete.com>"
     ],
-    "location":"coldbox-modules/coldbox-asset-bag#v0.0.0",
+    "location":"coldbox-modules/coldbox-asset-bag#v1.0.0",
     "homepage":"https://github.com/coldbox-modules/coldbox-asset-bag",
     "documentation":"https://github.com/coldbox-modules/coldbox-asset-bag",
     "repository":{
