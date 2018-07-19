@@ -1,4 +1,4 @@
-interface name="Asset" {
+interface displayname="Asset" {
 
     public string function toString();
     public numeric function getPriority();
