@@ -1,20 +1,20 @@
 component accessors="true" implements="Asset" {
 
-    property name="content";
+    property name="filepath";
     property name="priority" type="numeric" default="0";
 
-    function init( content ) {
-        variables.content = arguments.content;
+    function init( filepath ) {
+        variables.filepath = arguments.filepath;
         return this;
     }
 
     public string function toString() {
-        return '<script type="text/javascript" src="#content#"></script>';
+        return '<script type="text/javascript" src="#filepath#"></script>';
     }
 
     public boolean function isSameAs( required any otherAsset ) {
         return isInstanceOf( otherAsset, "JavascriptAsset" ) &&
-            ( getContent() == otherAsset.getContent() );
+            ( getFilepath() == otherAsset.getFilepath() );
     }
 
 }
