@@ -20,7 +20,7 @@ component implements="Asset" accessors="true" {
      *
      * @returns  The newly created css asset.
      */
-    public CssAsset function init( required string filepath ) {
+    public Asset function init( required string filepath ) {
         variables.filepath = arguments.filepath;
         return this;
     }
@@ -50,7 +50,7 @@ component implements="Asset" accessors="true" {
     *
     * @returns  The asset instance.
     */
-    public CSSAsset function setPriority( required numeric priority ) {
+    public Asset function setPriority( required numeric priority ) {
         variables.priority = arguments.priority;
         return this;
     }

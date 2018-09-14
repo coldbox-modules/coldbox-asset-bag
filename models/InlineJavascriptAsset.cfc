@@ -20,7 +20,7 @@ component implements="Asset" accessors="true" {
     *
     * @returns The newly created inline javascript asset.
     */
-    public InlineJavascriptAsset function init( required string content ) {
+    public Asset function init( required string content ) {
         variables.content = arguments.content;
         return this;
     }
@@ -50,7 +50,7 @@ component implements="Asset" accessors="true" {
     *
     * @returns  The asset instance.
     */
-    public InlineJavascriptAsset function setPriority( required numeric priority ) {
+    public Asset function setPriority( required numeric priority ) {
         variables.priority = arguments.priority;
         return this;
     }
