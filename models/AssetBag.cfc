@@ -1,6 +1,14 @@
+/**
+ * An object to collect css and javascript dependencies to render all at once.
+ */
 component {
 
-    function init() {
+    /**
+     * Initialize the head and footer collections.
+     *
+     * @returns The newly initialized asset bag.
+     */
+    public AssetBag function init() {
         variables.head = {
             css = [],
             javascript = []
@@ -12,69 +20,158 @@ component {
         return this;
     }
 
-    function addAsset( asset, location ) {
+    /**
+     * Add an asset to the asset bag.
+     * It is more common to use the more specific `add` methods.
+     * This method automatically removes duplicate assets.
+     * Duplicate assets are determined by type and path. Inline assets can't be deduped.
+     *
+     * @asset    The asset component to add. Although it does not need to implement the Asset interface, it must follow it in practice.
+     * @location Two values are accepted, `head` or `footer`.
+     *
+     * @returns  The newly added asset.
+     */
+    public any function addAsset( required asset, required string location ) {
         removeDuplicateAssets( asset );
         variables[ location ][ asset.getType() ].append( asset );
         return asset;
     }
 
-    function addAssetToHead( asset ) {
+    /**
+    * Add an asset to the head of the asset bag.
+    * It is more common to use the more specific `add` methods for css or javascript.
+    *
+    * @asset    The asset component to add.
+    *
+    * @returns  The newly added asset.
+    */
+    public any function addAssetToHead( required asset ) {
         return addAsset( asset, "head" );
     }
 
-    function addJavascriptToHead( filepath ) {
+    /**
+    * Add a javascript asset to the head of the asset bag.
+    *
+    * @filepath The path to the javascript file.
+    *
+    * @returns  The newly added asset.
+    */
+    public any function addJavascriptToHead( required string filepath ) {
         return addAssetToHead(
             new JavascriptAsset( filepath )
         );
     }
 
-    function addCssToHead( filepath ) {
+    /**
+    * Add a css asset to the head of the asset bag.
+    *
+    * @filepath The path to the css file.
+    *
+    * @returns  The newly added asset.
+    */
+    public any function addCssToHead( required string filepath ) {
         return addAssetToHead(
             new CssAsset( filepath )
         );
     }
 
-    function addInlineJavascriptToHead( content ) {
+    /**
+    * Add inline javascript to the head of the asset bag.
+    *
+    * @content The javascript content.
+    *
+    * @returns The newly added asset.
+    */
+    public any function addInlineJavascriptToHead( required string content ) {
         return addAssetToHead(
             new InlineJavascriptAsset( content )
         );
     }
 
-    function addInlineCssToHead( content ) {
+    /**
+    * Add inline css to the head of the asset bag.
+    *
+    * @content The css content.
+    *
+    * @returns The newly added asset.
+    */
+    public any function addInlineCssToHead( required string content ) {
         return addAssetToHead(
             new InlineCssAsset( content )
         );
     }
 
-    function addAssetToFooter( asset ) {
+    /**
+    * Add an asset to the footer of the asset bag.
+    * It is more common to use the more specific `add` methods for css or javascript.
+    *
+    * @asset    The asset component to add.
+    *
+    * @returns  The newly added asset.
+    */
+    public any function addAssetToFooter( required asset ) {
         return addAsset( asset, "footer" );
     }
 
-    function addJavascriptToFooter( filepath ) {
+    /**
+    * Add a javascript asset to the footer of the asset bag.
+    *
+    * @filepath The path to the javascript file.
+    *
+    * @returns  The newly added asset.
+    */
+    public any function addJavascriptToFooter( required string filepath ) {
         return addAssetToFooter(
             new JavascriptAsset( filepath )
         );
     }
 
-    function addCssToFooter( filepath ) {
+    /**
+    * Add a css asset to the footer of the asset bag.
+    *
+    * @filepath The path to the css file.
+    *
+    * @returns  The newly added asset.
+    */
+    public any function addCssToFooter( required string filepath ) {
         return addAssetToFooter(
             new CssAsset( filepath )
         );
     }
 
-    function addInlineJavascriptToFooter( content ) {
+    /**
+    * Add inline javascript to the footer of the asset bag.
+    *
+    * @content The javascript content.
+    *
+    * @returns The newly added asset.
+    */
+    public any function addInlineJavascriptToFooter( required string content ) {
         return addAssetToFooter(
             new InlineJavascriptAsset( content )
         );
     }
 
-    function addInlineCssToFooter( content ) {
+    /**
+    * Add inline css to the footer of the asset bag.
+    *
+    * @content The css content.
+    *
+    * @returns The newly added asset.
+    */
+    public any function addInlineCssToFooter( required string content ) {
         return addAssetToFooter(
             new InlineCssAsset( content )
         );
     }
 
-    function getHeadContent() {
+    /**
+     * Get the current array of assets in the head of the asset bag.
+     * The assets are sorted first by type (css then javascript), then by priority.
+     *
+     * @returns A sorted array of assets in the asset bag's head.
+     */
+    public array function getHeadContent() {
         arraySort( variables.head.css, function( headA, headB ) {
             return compare( headB.getPriority(), headA.getPriority() );
         } );
@@ -87,7 +184,13 @@ component {
         return totalHeadContent;
     }
 
-    function getFooterContent() {
+    /**
+    * Get the current array of assets in the footer of the asset bag.
+    * The assets are sorted first by type (css then javascript), then by priority.
+    *
+    * @returns A sorted array of assets in the asset bag's footer.
+    */
+    public array function getFooterContent() {
         arraySort( variables.footer.css, function( footerA, footerB ) {
             return compare( footerB.getPriority(), footerA.getPriority() );
         } );
@@ -100,19 +203,34 @@ component {
         return totalFooterContent;
     }
 
-    function renderHead() {
+    /**
+     * Renders the contents of the asset bag's head to a string.
+     *
+     * @returns The rendered contents of the asset bag's head.
+     */
+    public string function renderHead() {
         return getHeadContent().map( function( asset ) {
             return asset.toString();
         } ).toList( chr( 10 ) );
     }
 
-    function renderFooter() {
+    /**
+    * Renders the contents of the asset bag's footer to a string.
+    *
+    * @returns The rendered contents of the asset bag's footer.
+    */
+    public string function renderFooter() {
         return getFooterContent().map( function( asset ) {
             return asset.toString();
         } ).toList( chr( 10 ) );
     }
 
-    function removeDuplicateAssets( asset ) {
+    /**
+     * Removes any assets from the asset bag that is the same as the incoming asset.
+     *
+     * @asset The incoming asset to match against.
+     */
+    private void function removeDuplicateAssets( asset ) {
         variables.head.css = variables.head.css
             .filter( function( headAsset ) {
                 return ! headAsset.isSameAs( asset );
