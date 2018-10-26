@@ -1,3 +1,11 @@
+# v1.0.2
+## 26 Oct 2018 — 03:29:49 UTC
+
+### fix
+
++ __CssAsset:__ Add rel attribute ([304e665](https://github.com/coldbox-modules/coldbox-asset-bag/commit/304e66519ebd387597d62b6c1bb358bcc840d2b9))
+
+
 # v1.0.1
 ## 14 Sep 2018 — 15:27:34 UTC
 
