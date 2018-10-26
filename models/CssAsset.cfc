@@ -31,7 +31,7 @@ component implements="Asset" accessors="true" {
      * @returns The rendered asset.
      */
     public string function toString() {
-        return '<link type="text/css" href="#variables.filepath#">';
+        return '<link type="text/css" rel="stylesheet" href="#variables.filepath#">';
     }
 
     /**

@@ -28,7 +28,7 @@ component extends="testbox.system.BaseSpec" {
                 assetBag.addCssToHead( "/includes/css/app.css" );
 
                 expect( assetBag.renderHead() ).toBe(
-                    '<link type="text/css" href="/includes/css/app.css">'
+                    '<link type="text/css" rel="stylesheet" href="/includes/css/app.css">'
                 );
                 expect( assetBag.renderFooter() ).toBe( "" );
             } );
@@ -51,7 +51,7 @@ component extends="testbox.system.BaseSpec" {
 
                 expect( assetBag.renderHead() ).toBe( "" );
                 expect( assetBag.renderFooter() ).toBe(
-                    '<link type="text/css" href="/includes/css/app.css">'
+                    '<link type="text/css" rel="stylesheet" href="/includes/css/app.css">'
                 );
             } );
 
@@ -79,11 +79,11 @@ component extends="testbox.system.BaseSpec" {
                 assetBag.addCssToFooter( "/includes/css/app3.css" );
 
                 expect( assetBag.renderHead() ).toBe( arrayToList( [
-                    '<link type="text/css" href="/includes/css/app1.css">'
+                    '<link type="text/css" rel="stylesheet" href="/includes/css/app1.css">'
                 ], chr( 10 ) ) );
                 expect( assetBag.renderFooter() ).toBe( arrayToList( [
-                    '<link type="text/css" href="/includes/css/app2.css">',
-                    '<link type="text/css" href="/includes/css/app3.css">'
+                    '<link type="text/css" rel="stylesheet" href="/includes/css/app2.css">',
+                    '<link type="text/css" rel="stylesheet" href="/includes/css/app3.css">'
                 ], chr( 10 ) ) );
             } );
 
@@ -97,11 +97,11 @@ component extends="testbox.system.BaseSpec" {
                 assetBag.addCssToFooter( "/includes/css/app2.css" );
 
                 expect( assetBag.renderHead() ).toBe( arrayToList( [
-                    '<link type="text/css" href="/includes/css/app1.css">',
+                    '<link type="text/css" rel="stylesheet" href="/includes/css/app1.css">',
                     '<script type="text/javascript" src="/includes/js/app1.js"></script>'
                 ], chr( 10 ) ) );
                 expect( assetBag.renderFooter() ).toBe( arrayToList( [
-                    '<link type="text/css" href="/includes/css/app2.css">',
+                    '<link type="text/css" rel="stylesheet" href="/includes/css/app2.css">',
                     '<script type="text/javascript" src="/includes/js/app2.js"></script>'
                 ], chr( 10 ) ) );
             } );
@@ -154,7 +154,7 @@ component extends="testbox.system.BaseSpec" {
 
                 expect( assetBag.renderHead() ).toBe( "" );
                 expect( assetBag.renderFooter() ).toBe(
-                    '<link type="text/css" href="/includes/css/app.css">'
+                    '<link type="text/css" rel="stylesheet" href="/includes/css/app.css">'
                 );
             } );
 
@@ -194,8 +194,8 @@ component extends="testbox.system.BaseSpec" {
                 assetBag.addJavascriptToFooter( "/includes/js/app2.js" ).setPriority( 1 );
 
                 expect( assetBag.renderHead() ).toBe( arrayToList( [
-                    '<link type="text/css" href="/includes/css/app2.css">',
-                    '<link type="text/css" href="/includes/css/app1.css">'
+                    '<link type="text/css" rel="stylesheet" href="/includes/css/app2.css">',
+                    '<link type="text/css" rel="stylesheet" href="/includes/css/app1.css">'
                 ], chr( 10 ) ) );
                 expect( assetBag.renderFooter() ).toBe( arrayToList( [
                     '<script type="text/javascript" src="/includes/js/app2.js"></script>',
